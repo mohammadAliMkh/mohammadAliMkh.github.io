@@ -437,6 +437,21 @@ header{overflow-x:clip}
 .cf-hp{display:none!important}
 @media (max-width:720px){.cf-grid,.cf-row{grid-template-columns:minmax(0,1fr)}.cf-card{padding:20px}}
 </style>
+<style id="hero-phone">
+@media (max-width:720px){
+ .hero{gap:0!important;padding-top:20px!important}
+ .hero .hero-copy{display:contents!important}
+ .hero h1{order:1}
+ .hero .hero-photo{order:2;align-self:stretch!important;width:100%!important;max-width:none!important;
+   height:calc(100vh - var(--hp-used))!important;height:calc(100svh - var(--hp-used))!important;min-height:340px;
+   object-fit:contain;object-position:50% 100%;margin-top:14px;translate:none!important;opacity:1!important}
+ .hero .hero-copy>div:nth-of-type(1){order:3;margin:30px 0 24px!important}
+ .hero .hero-copy>div:nth-of-type(2){order:4;padding-bottom:12px}
+ /* header + hero top padding + the two-line name + gap above the photo */
+ html{--hp-used:calc(79px + 20px + 20.4vw + 14px)}
+ html[lang="fa"]{--hp-used:calc(80px + 20px + 27vw + 14px)}
+}
+</style>
 </head>
 <body>
 <div style="background: #0A0C10; color: #E9ECF2; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; position: relative">
@@ -1229,6 +1244,8 @@ function startScrollFX(doc) {
     var t = (y - zoneStart) / (zoneEnd - zoneStart);
     var down = y >= settled;
     var target = down ? (t > 0.12 ? zoneEnd : zoneStart) : (t < 0.88 ? zoneStart : zoneEnd);
+    // coming down from above a tall page: stop where its end is in view first, never skip its last part
+    if (down && settled < zoneStart - 2) target = zoneStart;
     settled = target;
     if (Math.abs(target - y) > 3) win.scrollTo({ top: target, behavior: 'smooth' });
   }
