@@ -695,7 +695,7 @@ header{overflow-x:clip}
 <h2 style="margin: 0; font-weight: 700; font-size: 48px; line-height: 1.4; max-width: 760px">هوش مصنوعی‌ای لازم دارید که باید درست کار کند، نه فقط چشمگیر باشد؟ صحبت کنیم.</h2>
 <div class="cf-grid">
 <form class="cf-card" id="contact-form" novalidate data-sending="در حال ارسال…" data-ok="پیامتان رسید. به‌زودی جواب می‌دهم." data-err="ارسال نشد. لطفاً دوباره امتحان کنید یا در لینکدین پیام بدهید." data-notset="فرم هنوز وصل نشده است.">
-<input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+<input type="hidden" name="access_key" value="695b1a11-2bb1-4383-a1fc-5943cb7649dd">
 <input type="hidden" name="subject" value="پیام تازه از پورتفولیو (فارسی)">
 <input type="hidden" name="from_name" value="Portfolio">
 <input type="checkbox" name="botcheck" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -1209,11 +1209,11 @@ function startScrollFX(doc) {
   }
   function onScroll() { if (!raf) raf = win.requestAnimationFrame(update); }
 
-  // pages: counter in the header + gentle snap to the nearest page start
+  // pages: counter in the header (free scrolling, no snap)
   var pages = Array.prototype.slice.call(doc.querySelectorAll('[data-page]'));
   var header = doc.querySelector('header');
   var counter = doc.querySelector('.page-count');
-  var snapTimer = 0, current = -1;
+  var current = -1;
   function headH() { return header ? header.offsetHeight : 0; }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function updateCounter() {
@@ -1225,29 +1225,8 @@ function startScrollFX(doc) {
       counter.textContent = pad(idx + 1) + ' / ' + pad(pages.length) + '  ·  ' + pages[idx].getAttribute('data-page');
     }
   }
-  var settled = win.scrollY || 0;
-  function snap() {
-    var h = headH(), vh = win.innerHeight - h, y = win.scrollY || 0;
-    var maxY = Math.max(0, root.scrollHeight - win.innerHeight);
-    var starts = pages.map(function (p) { return Math.min(maxY, Math.max(0, Math.round(p.getBoundingClientRect().top + y - h))); });
-    var i = 0;
-    for (var k = 0; k < starts.length; k++) if (starts[k] <= y + 1) i = k;
-    if (i >= starts.length - 1) { settled = y; return; }
-    var zoneStart = Math.max(starts[i], starts[i + 1] - vh);   // tall pages scroll freely until their end
-    var zoneEnd = starts[i + 1];
-    if (y < zoneStart + 2 || zoneEnd - zoneStart < 4) { settled = y; return; }
-    var t = (y - zoneStart) / (zoneEnd - zoneStart);
-    var down = y >= settled;
-    var target = down ? (t > 0.12 ? zoneEnd : zoneStart) : (t < 0.88 ? zoneStart : zoneEnd);
-    // coming down from above a tall page: stop where its end is in view first, never skip its last part
-    if (down && settled < zoneStart - 2) target = zoneStart;
-    settled = target;
-    if (Math.abs(target - y) > 3) win.scrollTo({ top: target, behavior: 'smooth' });
-  }
   function onSnapScroll() {
     updateCounter();
-    if (reduce) return;
-    clearTimeout(snapTimer); snapTimer = setTimeout(snap, 160);
   }
   win.addEventListener('scroll', onSnapScroll, { passive: true });
   updateCounter();
@@ -1257,7 +1236,7 @@ function startScrollFX(doc) {
   return function () {
     if (io) io.disconnect();
     win.removeEventListener('scroll', onScroll); win.removeEventListener('resize', onScroll);
-    win.removeEventListener('scroll', onSnapScroll); clearTimeout(snapTimer);
+    win.removeEventListener('scroll', onSnapScroll);
     if (raf) win.cancelAnimationFrame(raf);
   };
 }
