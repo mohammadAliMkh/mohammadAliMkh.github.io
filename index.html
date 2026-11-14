@@ -86,20 +86,6 @@ filter:drop-shadow(0 0 5px #8AA4FF) drop-shadow(0 0 14px rgba(138,164,255,.75))}
 .meteor.meteor-go::after{animation:meteor-run 1.9s cubic-bezier(.45,.05,.3,1) var(--md,0ms) 1 both}
 @keyframes meteor-run{0%{--ma:-40deg;opacity:0}12%{opacity:1}80%{opacity:1}100%{--ma:330deg;opacity:0}}
 @media (prefers-reduced-motion:reduce){.meteor::after{display:none}}
-</style><style id="work-style">
-#work p{color:#B6BDCB!important}
-#work .feat>article,#work .idx-row{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
-#work .feat>article:hover,#work .idx-row:hover{transform:translateY(-3px)}
-@media (prefers-reduced-motion:reduce){#work .feat>article:hover,#work .idx-row:hover{transform:none}}
-
-#work .feat>article{background:linear-gradient(180deg,#1A202C 0%,#131824 100%)!important;border-color:#2C3345!important;
- box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 28px 60px -28px rgba(0,0,0,.9)!important}
-#work .feat>article:hover{border-color:#3A4458!important}
-#work .idx{border-bottom:0!important;gap:14px}
-#work .idx-row{background:linear-gradient(180deg,#171C27,#121620)!important;border:1px solid #262D3D!important;border-radius:16px;padding:24px 28px!important;
- box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
-#work .idx-row:hover{border-color:#3A4458!important;background:linear-gradient(180deg,#1A202C,#141924)!important}
-@media (max-width:720px){#work .idx-row{padding:20px!important}}
 </style>
 <style id="bot-life">
 /* ---- the robot's world: whole header strip, on top of everything in it ---- */
@@ -452,6 +438,74 @@ header{overflow-x:clip}
  html[lang="fa"]{--hp-used:calc(80px + 20px + 27vw + 14px)}
 }
 </style>
+<style id="work-grid">
+#work .wgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:20px}
+#work .wc{position:relative;display:flex;flex-direction:column;gap:16px;padding:28px;border-radius:20px;
+ background:linear-gradient(180deg,#1A202C 0%,#131824 100%);border:1px solid #2C3345;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 28px 60px -28px rgba(0,0,0,.9);
+ transition:transform .25s ease,border-color .25s ease}
+#work .wc:hover{transform:translateY(-3px);border-color:#3A4458}
+#work .wc h3{margin:0;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:24px;line-height:1.25;color:#E9ECF2}
+#work .wc p{margin:0;color:#B6BDCB;font-size:15px;line-height:1.65}
+#work .wc-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#work .wc-tech{font-family:'JetBrains Mono',monospace;font-size:12px;color:#7C8597;white-space:nowrap}
+#work .wc-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:999px;
+ font-family:'JetBrains Mono',monospace;font-size:12px;white-space:nowrap}
+#work .wc-badge.live{color:var(--accent);background:rgba(138,164,255,.08);border:1px solid rgba(138,164,255,.32)}
+#work .wc-badge.done{color:#C9CFDB;background:rgba(255,255,255,.035);border:1px solid #2C3345}
+#work .wc-badge.done svg{width:12px;height:12px;color:#C9CFDB}
+#work .wc-dot{position:relative;width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+#work .wc-dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent);animation:wc-ping 1.8s ease-out infinite}
+@keyframes wc-ping{0%{transform:scale(1);opacity:.75}100%{transform:scale(3.2);opacity:0}}
+#work .wc-vis{height:196px;background:#0D1016;border:1px solid #1C212B;border-radius:14px;padding:16px 18px;overflow:hidden;display:flex;flex-direction:column}
+#work .wc-foot{margin-top:auto;font-size:14px;color:#7C8597}
+/* operator: progress list */
+#work .wc-steps{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;height:100%}
+#work .wc-steps h4{margin:0 0 4px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;font-weight:400;color:#7C8597}
+#work .wc-steps .col{display:flex;flex-direction:column;gap:9px}
+#work .wc-step{display:flex;align-items:center;gap:9px;font-size:14px;color:#A3ABBA;line-height:1.3}
+#work .wc-step i{flex:none;width:16px;height:16px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:10px}
+#work .wc-step.ok i{background:rgba(138,164,255,.14);color:var(--accent);border:1px solid rgba(138,164,255,.4)}
+#work .wc-step.ok{color:#D5DAE4}
+#work .wc-step.nx i{border:1px dashed #3A4252}
+#work .wc-step.now i{border:1px solid var(--accent)}
+#work .wc-step.now i::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);animation:wc-blink 1.6s ease-in-out infinite}
+@keyframes wc-blink{50%{opacity:.25}}
+/* process mining: stat + abstract variants */
+#work .wc-stat{display:flex;align-items:baseline;gap:10px}
+#work .wc-stat b{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:30px;color:var(--accent)}
+#work .wc-stat span{font-size:13px;color:#7C8597}
+#work .wc-flow{flex:1;width:100%;min-height:0;margin-top:8px}
+/* lottery: draw balls */
+#work .wc-balls{flex:1;display:flex;align-items:center;justify-content:center;gap:12px}
+#work .wc-balls span{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;
+ color:#A3ABBA;border:1px solid #2A3040;background:radial-gradient(circle at 35% 30%,#1E2431,#12161F)}
+#work .wc-balls span.win{color:#0A0C10;border-color:var(--accent);background:radial-gradient(circle at 35% 30%,#C9D5FF,#8AA4FF);box-shadow:0 0 22px -2px rgba(138,164,255,.6);transform:scale(1.15)}
+#work .wc-ticket{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:#7C8597}
+/* chatbot: existing mini chat sits inside .wc-vis */
+#work .wc-chat{flex-direction:row!important;align-items:flex-start;gap:12px!important}
+#work .wc-chat>div:last-child{align-self:flex-end!important}
+/* language */
+html[lang=fa] #work .wc h3{font-family:inherit;font-weight:700;font-size:23px;line-height:1.4}
+html[lang=fa] #work .wc p{line-height:1.9}
+html[lang=fa] #work .wc-badge,html[lang=fa] #work .wc-steps h4,html[lang=fa] #work .wc-ticket{font-family:inherit;font-size:13px;letter-spacing:0}
+html[lang=fa] #work .wc-flow{transform:scaleX(-1)}
+html[lang=fa] #work .wc-tech:not([dir=ltr]){font-family:inherit;font-size:13px}
+@media (max-width:720px){
+ #work{padding:72px 20px!important}
+ #work .wgrid{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto}
+ #work .wc{padding:22px}
+ #work .wc h3{font-size:21px}
+ #work .wc-vis{height:auto;min-height:170px}
+ #work .wc-steps{grid-template-columns:1fr}
+ #work .wc-chat{flex-direction:column!important}
+}
+/* in-progress indicator */
+@keyframes wc-loop{from{--ma:-40deg}to{--ma:320deg}}
+#work .wc.live.meteor::after{opacity:1;animation:wc-loop 6s linear infinite!important}
+#work .wc.live~.wc.live.meteor::after{animation-delay:-3s!important}
+@media (prefers-reduced-motion:reduce){#work .wc,#work .wc::after,#work .wc-dot::after,#work .wc-step.now i::before{animation:none!important}#work .wc:hover{transform:none}}
+</style>
 </head>
 <body>
 <div style="background: #0A0C10; color: #E9ECF2; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; position: relative">
@@ -605,29 +659,6 @@ header{overflow-x:clip}
 </section>
 
 <section id="work" class="page" data-page="Work" style="max-width: 1200px; margin: 0 auto; padding: 96px 32px; border-top: 1px solid #1C212B; display: flex; flex-direction: column; gap: 40px">
-<style>
-.w-h2{font-size:clamp(30px,4vw,40px)!important}
-.feat{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:20px}
-.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.idx{display:flex;flex-direction:column;border-bottom:1px solid #1C212B}
-.idx-row{display:grid;grid-template-columns:minmax(0,1fr) 170px 220px 28px;align-items:center;gap:32px;padding:26px 8px;border-top:1px solid #1C212B;color:#E9ECF2;transition:background .2s}
-.idx-row:hover{background:rgba(138,164,255,.04)}
-.idx-row:hover .idx-arrow{color:var(--accent);translate:4px 0}
-.idx-arrow{transition:translate .2s,color .2s;color:#7C8597;font-size:18px}
-#work a{white-space:nowrap} .idx-row{white-space:normal!important} .idx-fig span{white-space:nowrap}
-.op-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
-.pipe-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-@media (max-width:720px){
- .feat,.trio{grid-template-columns:minmax(0,1fr)}
- .op-split{grid-template-columns:minmax(0,1fr)!important}
- #work{padding:72px 20px!important}
- .idx-row{grid-template-columns:minmax(0,1fr) 20px;gap:10px 16px;padding:22px 0}
- .idx-row .idx-tags,.idx-row .idx-fig{grid-column:1}
- .idx-row .idx-arrow{grid-column:2;grid-row:1}
- .spot{flex-direction:column!important}
- #work article{padding:22px!important}
-}
-</style>
 <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 10px">
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent)">Selected work</span>
@@ -635,38 +666,25 @@ header{overflow-x:clip}
 </div>
 <p style="margin: 0; max-width: 400px; color: #A3ABBA; font-size: 15px">Systems from my work at a Bank Mellat subsidiary, and one I'm building now.</p>
 </div>
-<div class="feat"><article style="background: rgba(18, 21, 28, 0.86); border: 1px solid #1C212B; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 20px">
-<div style="display: flex; justify-content: space-between; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7C8597"><span style="color: var(--accent)">● In progress</span><span>Python · PostgreSQL</span></div>
-<h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 28px; line-height: 1.2">AI assistant for call-center operators</h3>
-<p style="margin: 0; color: #A3ABBA">Being built to production standards, on synthetic data. The goal: while the customer is still on the line, transcribe the call, search the knowledge base and suggest an answer with its source. No source, no answer.</p>
-<div class="op-split">
-<div style="display: flex; flex-direction: column; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 13px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: #7C8597">TARGET PIPELINE</span><span style="padding: 8px 12px; border: 1px solid #2A3040; border-radius: 10px">call audio</span><span style="padding-inline-start: 12px; color: #7C8597">↓ speech to text</span><span style="padding: 8px 12px; border: 1px solid #2A3040; border-radius: 10px">hybrid search · pgvector</span><span style="padding-inline-start: 12px; color: #7C8597">↓ grounded generation</span><span style="padding: 8px 12px; border: 1px solid var(--accent); border-radius: 10px; color: var(--accent)">answer + source</span></div>
-<div style="display: flex; flex-direction: column; gap: 16px; background: #0D1016; border: 1px solid #1C212B; border-radius: 14px; padding: 18px">
-<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--accent)">DONE</span><span style="font-size: 14px; color: #A3ABBA">Requirements, architecture decisions (ports and adapters, PostgreSQL + pgvector) and a validated knowledge-base loader with 62 tests.</span></div>
-<div style="display: flex; flex-direction: column; gap: 6px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: #7C8597">NEXT</span><span style="font-size: 14px; color: #A3ABBA">Speech to text, hybrid search, grounded generation.</span></div>
-</div></div>
-<div style="margin-top: auto; font-size: 14px; color: #7C8597">Synthetic data · no real customer data</div>
-</article><article style="background: rgba(18, 21, 28, 0.86); border: 1px solid #1C212B; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 20px">
-<div style="display: flex; justify-content: space-between; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7C8597"><span>Chatbot · reporting</span><span>Java · MegaBank</span></div>
-<h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 24px; line-height: 1.25">Report chatbot for bank managers</h3>
-<p style="margin: 0; color: #A3ABBA">A menu-driven chatbot inside the MegaBank messenger that delivers statistical reports to bank managers, from head-office departments to branches nationwide. I gathered requirements with the statistics and marketing departments and built it in Java.</p>
-<div style="display: flex; flex-direction: column; gap: 10px; background: #0D1016; border: 1px solid #1C212B; border-radius: 14px; padding: 18px">
+<div class="wgrid">
+<article class="wc live"><div class="wc-top"><span class="wc-badge live"><i class="wc-dot"></i>In progress</span><span class="wc-tech">Python · PostgreSQL</span></div><h3>AI assistant for call-center operators</h3><p>Being built to production standards, on synthetic data. The goal: while the customer is still on the line, transcribe the call, search the knowledge base and suggest an answer with its source. No source, no answer.</p><div class="wc-vis"><div class="wc-steps"><div class="col"><h4>DONE</h4><span class="wc-step ok"><i>✓</i>Requirements</span><span class="wc-step ok"><i>✓</i>Architecture</span><span class="wc-step ok"><i>✓</i>Knowledge-base loader · 62 tests</span></div><div class="col"><h4>NEXT</h4><span class="wc-step now"><i></i>Speech to text</span><span class="wc-step nx"><i></i>Hybrid search</span><span class="wc-step nx"><i></i>Grounded answers</span></div></div></div><div class="wc-foot">Synthetic data · no real customer data</div></article>
+<article class="wc live"><div class="wc-top"><span class="wc-badge live"><i class="wc-dot"></i>In progress</span><span class="wc-tech" dir="ltr">Process mining</span></div><h3>Process mining on loan data</h3><p>Discovering the variants of the loan granting and cancellation processes from 20 million records, and where they stall. Ongoing, as a process-mining specialist on the team.</p><div class="wc-vis"><div class="wc-stat"><b>20M</b><span>loan records</span></div><svg class="wc-flow" viewBox="0 0 400 110" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<g fill="none" stroke-linecap="round">
+<path d="M14 55 C120 55 280 55 386 55" stroke="#8AA4FF" stroke-width="3" opacity=".9"/>
+<path d="M14 55 C90 55 110 18 200 18 C290 18 310 55 386 55" stroke="#3A4252" stroke-width="2"/>
+<path d="M14 55 C90 55 110 92 170 92 C230 92 250 92 300 92 C340 92 350 55 386 55" stroke="#3A4252" stroke-width="1.5" stroke-dasharray="4 5"/>
+</g>
+<circle cx="14" cy="55" r="6" fill="#0D1016" stroke="#8AA4FF" stroke-width="2"/>
+<circle cx="386" cy="55" r="6" fill="#8AA4FF"/>
+<circle cx="200" cy="18" r="4" fill="#3A4252"/><circle cx="134" cy="55" r="4" fill="#8AA4FF"/><circle cx="266" cy="55" r="4" fill="#8AA4FF"/>
+<circle cx="235" cy="92" r="9" fill="none" stroke="#F0A6CA" stroke-width="1.5" opacity=".9"/><circle cx="235" cy="92" r="4" fill="#F0A6CA"/>
+</svg></div><div class="wc-foot">Process-mining specialist on the team</div></article>
+<article class="wc"><div class="wc-top"><span class="wc-badge done"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.3l2.3 2.2 4.7-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Done</span><span class="wc-tech">Java · MegaBank</span></div><h3>Report chatbot for bank managers</h3><p>A menu-driven chatbot inside the MegaBank messenger that delivers statistical reports to bank managers, from head-office departments to branches nationwide. I gathered requirements with the statistics and marketing departments and built it in Java.</p><div class="wc-vis wc-chat">
 <div style="align-self: flex-start; padding: 12px 14px; border-radius: 14px 14px 14px 4px; border: 1px solid #2A3040; font-size: 13px; color: #A3ABBA; display: flex; flex-direction: column; gap: 10px"><span>Which report?</span><span style="display: flex; flex-wrap: wrap; gap: 6px"><span style="padding: 5px 12px; border: 1px solid var(--accent); border-radius: 999px; font-size: 13px; color: var(--accent)">Deposits</span><span style="padding: 5px 12px; border: 1px solid #2A3040; border-radius: 999px; font-size: 13px; color: #A3ABBA">Loans</span><span style="padding: 5px 12px; border: 1px solid #2A3040; border-radius: 999px; font-size: 13px; color: #A3ABBA">Branches</span></span></div>
 <div style="align-self: flex-start; padding: 12px 14px; border-radius: 14px 14px 14px 4px; border: 1px solid #2A3040; font-size: 13px; color: #A3ABBA; display: flex; flex-direction: column; gap: 10px"><span>Monthly deposits · by branch</span>
-<span aria-hidden="true" style="display: flex; align-items: flex-end; gap: 5px; height: 40px; border-bottom: 1px solid #2A3040"><span style="width: 10px; height: 14px; border-radius: 3px 3px 0 0; background: var(--accent); opacity: 0.35"></span><span style="width: 10px; height: 22px; border-radius: 3px 3px 0 0; background: var(--accent); opacity: 0.45"></span><span style="width: 10px; height: 18px; border-radius: 3px 3px 0 0; background: var(--accent); opacity: 0.4"></span><span style="width: 10px; height: 30px; border-radius: 3px 3px 0 0; background: var(--accent); opacity: 0.6"></span><span style="width: 10px; height: 26px; border-radius: 3px 3px 0 0; background: var(--accent); opacity: 0.55"></span><span style="width: 10px; height: 38px; border-radius: 3px 3px 0 0; background: var(--accent); opacity: 0.85"></span></span></div></div>
-<div style="margin-top: auto; font-size: 14px; color: #7C8597">Managers nationwide · head office to branches</div>
-</article></div>
-<div class="idx"><div class="idx-row">
-<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.3">Process mining on loan data</span><span style="color: #A3ABBA; font-size: 15px">Discovering the variants of the loan granting and cancellation processes from 20 million records, and where they stall. Ongoing, as a process-mining specialist on the team.</span></span>
-<span class="idx-tags" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7C8597">Process mining</span>
-<span class="idx-fig" style="display: flex; align-items: baseline; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 22px; color: var(--accent)">20M</span><span style="font-size: 13px; color: #7C8597">loan records</span></span>
-<span class="idx-arrow" aria-hidden="true"></span>
-</div><div class="idx-row">
-<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.3">Lottery system</span><span style="color: #A3ABBA; font-size: 15px">A lottery system for a Bank Mellat department, built with AI-assisted development. Now with the production team for review.</span></span>
-<span class="idx-tags" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7C8597">AI-assisted build</span>
-<span class="idx-fig" style="display: flex; align-items: baseline; gap: 8px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 22px; color: #A3ABBA">In review</span><span style="font-size: 13px; color: #7C8597">production team</span></span>
-<span class="idx-arrow" aria-hidden="true"></span>
-</div></div>
+<span aria-hidden="true" style="display: flex; align-items: flex-end; gap: 5px; height: 40px; border-bottom: 1px solid #2A3040"><span style="width: 10px; height: 14px; border-radius: 3px 3px 0 0; background: var(--accent); opacity: 0.35"></span><span style="width: 10px; height: 22px; border-radius: 3px 3px 0 0; background: var(--accent); opacity: 0.45"></span><span style="width: 10px; height: 18px; border-radius: 3px 3px 0 0; background: var(--accent); opacity: 0.4"></span><span style="width: 10px; height: 30px; border-radius: 3px 3px 0 0; background: var(--accent); opacity: 0.6"></span><span style="width: 10px; height: 26px; border-radius: 3px 3px 0 0; background: var(--accent); opacity: 0.55"></span><span style="width: 10px; height: 38px; border-radius: 3px 3px 0 0; background: var(--accent); opacity: 0.85"></span></span></div></div><div class="wc-foot">Managers nationwide · head office to branches</div></article>
+<article class="wc"><div class="wc-top"><span class="wc-badge done"><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.3l2.3 2.2 4.7-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Done</span><span class="wc-tech" dir="ltr">AI-assisted build</span></div><h3>Lottery system</h3><p>A lottery system for a Bank Mellat department, built with AI-assisted development. Now with the production team for review.</p><div class="wc-vis"><div class="wc-ticket"><span>DRAW</span><span>RESULT</span></div><div class="wc-balls" dir="ltr"><span>17</span><span>04</span><span class="win">29</span><span>11</span><span>36</span></div></div><div class="wc-foot">With the production team for review</div></article>
+</div>
 </section>
 
 
